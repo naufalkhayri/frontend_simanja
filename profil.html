@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simanja | Profil Diri</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="./assets/css/profil.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <!-- Brand di ujung kiri -->
+      <div class="nav-brand-container">
+        <a href="#" class="nav-brand">
+          Profil Diri
+        </a>
+      </div>
+
+      <!-- Tombol kembali di ujung kanan -->
+      <div class="nav-back-container">
+        <a href="dashboard.html" class="nav-back-btn">
+          <i class="fas fa-arrow-left"></i>
+          Kembali
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <!-- Main Content - Semua dalam satu container -->
+    <main class="main-content">
+      <!-- Profile Header - Foto dan Info Dasar -->
+      <div class="profile-header">
+        <!-- Photo Section -->
+        <div class="photo-section">
+          <div class="foto-container">
+            <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" alt="Foto Profil" class="profil_foto" id="foto_profil">
+            <div class="upload-overlay">
+              <label for="upload_foto" class="upload-btn">
+                <i class="fas fa-camera"></i>
+              </label>
+              <input type="file" id="upload_foto" accept="image/*" style="display: none;">
+            </div>
+          </div>
+          <p class="status">Akun Aktif</p>
+        </div>
+
+        <!-- Basic Info -->
+        <div class="basic-info">
+          <h2 id="nama_pengguna">Fadly Hudaya Simanjuntak</h2>
+          <span class="info-label">JENIS KELAMIN</span>
+          <span class="info-value" id="gender">Laki-laki</span>
+        </div>
+
+        <!-- Edit Button di Kanan -->
+        <div class="edit-button-container">
+          <button class="edit-btn" id="editProfileBtn" style="margin-right: 10px;">
+            <i class="fas fa-edit"></i>
+            Edit Profil
+          </button>
+          <button class="edit-btn" id="ubahPasswordBtn" style="background: #2e7efe;">
+            <i class="fas fa-key"></i>
+            Ubah Password
+          </button>
+        </div>
+      </div>
+
+      <!-- Profile Details Grid -->
+      <div class="profile-details">
+        <!-- Identitas Section -->
+        <section class="profile-section">
+          <h2 class="section-title">Identitas</h2>
+          <div class="info-grid">
+            <div class="info-item">
+              <span class="info-label">NAMA LENGKAP</span>
+              <span class="info-value" id="nama_lengkap"></span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">JENIS KELAMIN</span>
+              <span class="info-value" id="jenis_kelamin"></span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">TANGGAL LAHIR</span>
+              <span class="info-value" id="tgl_lahir"></span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">ALAMAT</span>
+              <span class="info-value" id="alamat"></span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Kontak Section -->
+        <section class="profile-section">
+          <h2 class="section-title">Kontak</h2>
+          <div class="contact-section">
+            <div class="info-grid">
+              <div class="info-item">
+                <span class="info-label">EMAIL</span>
+                <span class="info-value" id="email_pengguna"></span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">TELEPON</span>
+                <span class="info-value" id="handphone"></span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal Edit Profil -->
+  <div id="modal_edit" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Edit Profil</h2>
+        <span class="close" id="closeModal">&times;</span>
+      </div>
+      
+      <div class="modal-form">
+        <form id="form_edit_profil">
+          <div class="form-group">
+            <label for="edit_nama">Nama Lengkap</label>
+            <input type="text" id="edit_nama" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="edit_email">Email</label>
+            <input type="email" id="edit_email" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="edit_handphone">Telepon</label>
+            <input type="tel" id="edit_handphone" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="edit_tgl_lahir">Tanggal Lahir</label>
+            <input type="date" id="edit_tgl_lahir" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="edit_gender">Jenis Kelamin</label>
+            <select id="edit_gender" required>
+              <option value="Laki-laki">Laki-laki</option>
+              <option value="Perempuan">Perempuan</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="edit_alamat">Alamat</label>
+            <input type="text" id="edit_alamat" required>
+          </div>
+          
+          <div class="modal-actions">
+            <div class="form-actions">
+              <button type="submit" class="save_btn">Simpan Perubahan</button>
+              <button type="button" class="cancel_btn" id="cancelEdit">Batal</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Ubah Password -->
+  <div id="modal_ubah_password" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Ubah Password</h2>
+        <span class="close" id="closePasswordModal">&times;</span>
+      </div>
+      
+      <div class="modal-form">
+        <form id="form_ubah_password">
+          <div class="form-group">
+            <label for="password_lama">Password Lama</label>
+            <input type="password" id="password_lama" required>
+            <p id="passwordLamaError" class="error-message hidden"></p>
+          </div>
+          
+          <div class="form-group">
+            <label for="password_baru">Password Baru</label>
+            <input type="password" id="password_baru" required>
+            <p id="passwordBaruError" class="error-message hidden"></p>
+          </div>
+          
+          <div class="form-group">
+            <label for="konfirmasi_password">Konfirmasi Password Baru</label>
+            <input type="password" id="konfirmasi_password" required>
+            <p id="konfirmasiPasswordError" class="error-message hidden"></p>
+          </div>
+          
+          <div class="modal-actions">
+            <div class="form-actions">
+              <button type="submit" class="save_btn">Ubah Password</button>
+              <button type="button" class="cancel_btn" id="cancelUbahPassword">Batal</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="./assets/js/profil.js"></script>
+</body>
+</html>

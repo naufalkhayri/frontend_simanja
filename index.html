@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Simanja - Manajemen Keuangan</title>
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    /* Fade-in animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes popbounce {
+      0% { transform: scale(1); }
+      30% { transform: scale(1.25); }
+      50% { transform: scale(0.9); }
+      70% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    .animate-pop-bounce {
+      animation: popbounce 1.2s ease-in-out infinite;
+    }
+
+    /* ===== MOBILE RESPONSIVE ===== */
+    @media (max-width: 768px) {
+
+      /* Hero text */
+      #beranda h1 {
+        font-size: 2rem;
+      }
+
+      /* Kurangi tinggi fitur */
+      #features {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+      }
+
+      /* Gambar fitur mengecil */
+      .fitur-gambar {
+        width: 150px !important;
+        height: 150px !important;
+      }
+
+      /* Emoji kecil di HP */
+      .emoji-kiri, .emoji-kanan {
+        width: 150px !important;
+        height: 150px !important;
+        position: static !important;
+        margin: 20px auto;
+      }
+
+      /* Footer alignment */
+      footer {
+        text-align: center;
+      }
+      .kontak-footer {
+        justify-content: center !important;
+      }
+    }
+  </style>
+
+</head>
+<body class="bg-gray-100">
+
+  <!-- Navbar -->
+  <nav class="bg-green-900 text-white p-4 shadow-md w-full fixed top-0 z-50">
+    <div class="max-w-7xl mx-auto flex justify-between items-center px-4">
+
+      <!-- Logo -->
+      <div class="text-2xl font-bold">Simanja</div>
+
+      <!-- Menu Desktop -->
+      <div class="hidden md:flex space-x-6 items-center">
+        <a href="#beranda" class="hover:text-green-300">Beranda</a>
+        <a href="#about" class="hover:text-green-300">Tentang</a>
+        <a href="#features" class="hover:text-green-300">Fitur</a>
+        <a href="#contact" class="hover:text-green-300">Kontak</a>
+        <a href="login.html" class="bg-white text-green-900 px-3 py-1 rounded-lg hover:bg-green-200 text-sm">Login</a>
+        <a href="register.html" class="bg-green-700 px-3 py-1 rounded-lg hover:bg-green-800 text-sm">Daftar</a>
+      </div>
+
+      <!-- Hamburger Button Mobile -->
+      <button id="menu-btn" class="md:hidden focus:outline-none text-3xl">
+        ☰
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden flex flex-col bg-green-800 text-white px-6 py-4 space-y-4">
+
+      <a href="#beranda" class="hover:text-green-300">Beranda</a>
+      <a href="#about" class="hover:text-green-300">Tentang</a>
+      <a href="#features" class="hover:text-green-300">Fitur</a>
+      <a href="#contact" class="hover:text-green-300">Kontak</a>
+
+      <a href="login.html" class="bg-white text-green-900 px-3 py-2 rounded-lg text-center hover:bg-green-200 text-sm">Login</a>
+      <a href="register.html" class="bg-green-700 px-3 py-2 rounded-lg text-center hover:bg-green-800 text-sm text-white">Daftar</a>
+
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="beranda" class="bg-cover bg-center h-screen flex items-center justify-center mt-16"
+    style="background-image: url('https://images.pexels.com/photos/6694965/pexels-photo-6694965.jpeg');">
+    <div class="bg-green-900 bg-opacity-70 p-10 rounded-xl text-center text-white max-w-2xl">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Kelola Keuanganmu dengan Simanja</h1>
+      <p class="mb-6 text-lg">Catat pemasukan & pengeluaran, pantau saldo, dan buat laporan keuangan secara mudah.</p>
+      <div class="space-x-4">
+        <a href="register.html" class="bg-white text-green-900 px-6 py-3 rounded-lg font-semibold hover:bg-green-200">Daftar Sekarang!</a>
+        <a href="login.html" class="bg-green-700 px-6 py-3 rounded-lg font-semibold hover:bg-green-800">Login</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tentang Section -->
+  <section id="about" class="py-36 bg-gray-100">
+    <div class="max-w-7xl mx-auto mb-8 px-5">
+      <h2 class="text-3xl font-bold text-green-900 text-center fade-in">Pernahkah Anda Mengalami Hal Ini? 🧐</h2>
+      <p class="text-green-700 mt-4 fade-in">Berbagai permasalahan dalam pengelolaan administrasi, kegiatan, dan data mahasiswa sering kali menghambat proses belajar dan organisasi. SIMANJA hadir untuk membantu mempermudah semuanya.</p>
+    </div>
+
+    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-8 px-5">
+      <div class="bg-white p-5 rounded-xl shadow fade-in"><p class="text-green-700 font-bold">Data mahasiswa yang tidak rapi dan sulit ditemukan saat dibutuhkan</p></div>
+      <div class="bg-white p-5 rounded-xl shadow fade-in"><p class="text-green-700 font-bold">Kesalahan input & kehilangan data karena pencatatan masih manual</p></div>
+      <div class="bg-white p-5 rounded-xl shadow fade-in"><p class="text-green-700 font-bold">Tidak adanya sistem terpadu mengelola kegiatan & administrasi kampus</p></div>
+      <div class="bg-white p-5 rounded-xl shadow fade-in"><p class="text-green-700 font-bold">Kesulitan memantau pembayaran administrasi</p></div>
+      <div class="bg-white p-5 rounded-xl shadow fade-in"><p class="text-green-700 font-bold">Proses pembuatan laporan memakan waktu</p></div>
+      <div class="bg-white p-5 rounded-xl shadow fade-in"><p class="text-green-700 font-bold">Tidak ada pengingat otomatis untuk jadwal penting</p></div>
+      <div class="bg-white p-5 rounded-xl shadow fade-in"><p class="text-green-700 font-bold">Sulit memonitor aktivitas mahasiswa</p></div>
+      <div class="bg-white p-5 rounded-xl shadow fade-in"><p class="text-green-700 font-bold">Sulit menganalisis data untuk keputusan</p></div>
+    </div>
+
+    <div class="flex justify-center relative">
+      <img src="idk.png" class="w-80 h-80 animate-pop-bounce relative left-[-100px] top-[100px] emoji-kiri">
+      <img src="idk2.png" class="w-96 h-96 animate-pop-bounce relative right-[-100px] top-[70px] emoji-kanan">
+    </div>
+  </section>
+
+  <!-- Fitur Section -->
+  <section id="features" class="py-96 bg-gree">
+    <div class="max-w-7xl mx-auto text-center mb-12 px-5">
+      <h2 class="text-3xl font-bold text-green-900">Fitur Simanja💡</h2>
+      <p class="text-green-700 mt-4">Mudah digunakan dan lengkap untuk kebutuhan manajemen keuangan Anda</p>
+    </div>
+
+    <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-8 px-5">
+
+      <div>
+        <div class="bg-white p-8 rounded-xl shadow fade-in text-center">
+          <h3 class="font-bold text-green-900 mb-2">Catat Pemasukan</h3>
+          <p class="text-green-700">Masukkan pemasukan harian, mingguan, dan bulanan dengan mudah.</p>
+        </div>
+        <div class="bg-green-900 p-6 rounded-xl shadow mt-4 flex justify-center">
+          <img src="ss1.png" class="w-72 h-72 fitur-gambar">
+        </div>
+      </div>
+
+      <div>
+        <div class="bg-white p-8 rounded-xl shadow fade-in text-center">
+          <h3 class="font-bold text-green-900 mb-2">Catat Pengeluaran</h3>
+          <p class="text-green-700">Pantau semua pengeluaran agar keuangan tetap sehat.</p>
+        </div>
+        <div class="bg-green-900 p-6 rounded-xl shadow mt-4 flex justify-center">
+          <img src="ss2.png" class="w-72 h-72 fitur-gambar">
+        </div>
+      </div>
+
+      <div>
+        <div class="bg-white p-8 rounded-xl shadow fade-in text-center">
+          <h3 class="font-bold text-green-900 mb-2">Laporan Keuangan</h3>
+          <p class="text-green-700">Lihat ringkasan keuangan lengkap secara real-time.</p>
+        </div>
+        <div class="bg-green-900 p-6 rounded-xl shadow mt-4 flex justify-center">
+          <img src="ss3.png" class="w-72 h-72 fitur-gambar">
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact" class="bg-green-900 text-white py-6 w-full px-6 mt-20">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+
+      <p class="text-sm">&copy; 2025 Simanja. Pengatur Keuangan Kamu.</p>
+
+      <div class="flex items-center gap-6 kontak-footer">
+
+        <a href="https://wa.me/6281536259037" target="_blank" class="flex items-center gap-2 hover:text-green-300">
+          <img src="wa.png" class="w-8 h-8">
+          <span class="text-sm font-semibold">WhatsApp</span>
+        </a>
+
+        <a href="https://www.instagram.com/agnesrefanya/" target="_blank" class="flex items-center gap-2 hover:text-green-300">
+          <img src="ig.png" class="w-8 h-8">
+          <span class="text-sm font-semibold">Instagram</span>
+        </a>
+
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- JavaScript Fade-in -->
+  <script>
+    const faders = document.querySelectorAll('.fade-in');
+    const appearOptions = { threshold: 0.2 };
+
+    const appearOnScroll = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if(entry.isIntersecting){
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, index * 150);
+        } else {
+          entry.target.classList.remove('visible');
+        }
+      });
+    }, appearOptions);
+
+    faders.forEach(fader => appearOnScroll.observe(fader));
+  </script>
+
+  <!-- Script untuk Hamburger Menu -->
+  <script>
+    const btn = document.getElementById('menu-btn');
+    const menu = document.getElementById('mobile-menu');
+
+    btn.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+    });
+  </script>
+
+</body>
+</html>

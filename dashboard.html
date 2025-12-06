@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <meta name="google" content="notranslate" />
+  <title>Keuanganku | Pengelola Keuangan</title>
+
+  <!-- Font Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- File CSS -->
+  <link rel="stylesheet" href="./assets/css/style.css" />
+  
+  <!-- Font Awesome untuk icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <!-- BAGIAN HEADER DENGAN NAVBAR -->
+  <header>
+    <div class="navbar-container">
+      <div class="navbar-left">
+        <h1 class="logo">Keuanganku</h1>
+      </div>
+      
+      <div class="navbar-right">
+        <div class="date-time">
+          <p id="date"></p>
+          <p id="time"></p>
+        </div>
+        
+        <!-- Profil Section -->
+        <div class="profile-section">
+          <div class="profile-circle" id="profileCircle">
+            <!-- Foto profil akan dimuat di sini melalui JavaScript -->
+          </div>
+          
+          <!-- Dropdown Menu -->
+          <div class="profile-dropdown" id="profileDropdown">
+            <a href="profil.html" class="dropdown-item">
+              <i class="fas fa-user"></i>
+              Profil Diri
+            </a>
+            <a href="dashboard.html" class="dropdown-item">
+              <i class="fas fa-chart-line"></i>
+              Dashboard
+            </a>
+            <button class="dropdown-item logout" id="logoutBtn">
+              <i class="fas fa-sign-out-alt"></i>
+              Logout
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- POPUP / FORM TAMBAH TRANSAKSI -->
+    <section class="popup_area">
+      <div class="popupblur"></div>
+      <div class="popup">
+        <button class="btn_close" id="close">&#x2715;</button>
+        <div class="body_popup">
+          <h2>Transaksi Baru</h2>
+          <form id="formTransaction">
+            <div class="option_form">
+              <label><input type="radio" name="type" value="income" id="incomeRadio">Pemasukan</label>
+              <label><input type="radio" name="type" value="expense" id="expenseRadio" checked>Pengeluaran</label>
+            </div>
+
+            <div class="form">
+              <label for="description">Keterangan:</label>
+              <input type="text" id="description" name="description" placeholder="Masukkan keterangan transaksi" required>
+            </div>
+
+            <div class="form">
+              <label for="amount">Jumlah (Rp):</label>
+              <input type="number" id="amount" name="amount" step="0.01" placeholder="0.00" min="0" required>
+            </div>
+
+            <div class="form">
+              <label for="dateInput">Tanggal:</label>
+              <input type="date" id="dateInput" name="date" required>
+            </div>
+
+            <div class="form">
+              <label for="buktiInput">Bukti Transaksi:</label>
+              <input type="file" id="buktiInput" accept="image/*">
+            </div>
+
+            <div class="input-group actions">
+              <button type="button" class="cancel">Batal</button>
+              <button type="submit" class="save">Simpan</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- BAGIAN RINGKASAN DENGAN ICON -->
+    <section class="recap_box">
+      <div class="recap-item pemasukan">
+        <div class="recap-icon">
+          <i class="fas fa-arrow-down"></i>
+        </div>
+        <div class="recap-content">
+          <h4>Total Pemasukan</h4>
+          <p id="incomeDisplay">Rp 0</p>
+        </div>
+      </div>
+      
+      <div class="recap-item pengeluaran">
+        <div class="recap-icon">
+          <i class="fas fa-arrow-up"></i>
+        </div>
+        <div class="recap-content">
+          <h4>Total Pengeluaran</h4>
+          <p id="expenseDisplay">Rp 0</p>
+        </div>
+      </div>
+      
+      <div class="recap-item saldo">
+        <div class="recap-icon">
+          <i class="fas fa-wallet"></i>
+        </div>
+        <div class="recap-content">
+          <h4>Saldo Akhir</h4>
+          <p id="totalDisplay">Rp 0</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DAFTAR TRANSAKSI -->
+    <section class="list_box">
+      <div class="header_list">
+        <h2>Daftar Transaksi</h2>
+      </div>
+      <div class="list_data">
+        <table id="data-table">
+          <thead>
+            <tr>
+              <th>Keterangan</th>
+              <th>Jumlah</th>
+              <th>Tanggal</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- CHART SECTION - DIPERBAIKI DENGAN FILTER WAKTU LENGKAP -->
+    <section class="chart-section">
+      <div class="chart-container">
+        <div class="chart-header">
+          <h2>Statistik Keuangan</h2>
+        </div>
+        
+        <div class="chart-controls">
+          <select id="chartTypeSelector">
+            <option value="pie">Pie Chart - Distribusi Pengeluaran</option>
+            <option value="line">Line Chart - Trend Bulanan</option>
+            <option value="bar">Bar Chart - Perbandingan Bulanan</option>
+            <option value="doughnut">Donut Chart - Distribusi Pengeluaran</option>
+          </select>
+          <select id="timeRangeSelector">
+            <option value="all">Semua Waktu</option>
+            <option value="3months">3 Bulan Terakhir</option>
+            <option value="6months">6 Bulan Terakhir</option>
+            <option value="1year">1 Tahun Terakhir</option>
+          </select>
+        </div>
+        
+        <div class="chart-wrap">
+          <!-- CANVAS UTAMA -->
+          <canvas id="mainChart"></canvas>
+
+          <!-- NO DATA MESSAGE -->
+          <div class="no-data-box" style="display:none;">
+            <i class="fas fa-chart-pie"></i>
+            <p>Belum ada data transaksi</p>
+            <small>Tambahkan transaksi untuk melihat statistik</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TOMBOL TAMBAH -->
+    <button class="show_form" id="showForm">+</button>
+
+    <!-- POPUP BUKTI -->
+    <div class="popup_area" id="popupBuktiArea">
+      <div class="popupblur"></div>
+      <div class="popup" style="max-width:350px;">
+        <button class="btn_close">&#x2715;</button>
+        <h2>Bukti Transaksi</h2>
+        <img id="previewBukti" style="width:100%;border-radius:10px;margin-bottom:15px">
+      </div>
+    </div>
+  </main>
+
+  <!-- BAGIAN FOOTER - DIPERBAIKI DENGAN TOMBOL RESET -->
+  <footer>
+    <h3>Keuanganku</h3>
+    <h4>Aplikasi Pengelola Keuangan Pribadi</h4>
+    <p>
+      <a href="#" id="resetData">Atur Ulang</a> |
+      <a href="tentang.html">Tentang Kami</a> |
+      <a href="https://wa.me/+6281536259037" target="_blank">Hubungi Kami</a>
+    </p>
+  </footer>
+
+  <script src="./assets/js/main.js"></script>
+</body>
+</html>
