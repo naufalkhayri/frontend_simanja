@@ -26,7 +26,7 @@
 
     // 🔐 API Helper Functions
     const API = {
-      baseURL: 'http://localhost:3000/api',
+      baseURL: 'https://backend-simanja.vercel.app',
       
       async getHeaders(isFormData = false) {
         const token = localStorage.getItem('token');
@@ -1019,4 +1019,5 @@
         // Page is visible, refresh data
         Aplikasi.mulai();
       }
+
     })
